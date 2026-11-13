@@ -11,9 +11,9 @@ npm run dev
 
 ## Personalize it
 
-- Update the names, anniversary date, and letter copy in `src/main.jsx`.
+- Update the names (`Nayyyy & Keillaa`), anniversary date, and letter copy in `src/main.jsx`.
 - Replace the Unsplash photo IDs in the `photos` list and the `memories` entries with your own photos.
-- Change the optional music URL on the `<audio>` element in `src/main.jsx`.
+- The Playlist surprise embeds Bruno Mars’s official “Risk It All” video from YouTube. Change `youtubeId` in `src/main.jsx` to choose a different video.
 - The layout respects `prefers-reduced-motion` for visitors who request less animation.
 
-The photos and music currently use public demo URLs. Replace them with your own media before sharing a personal version.
+The photos currently use public demo URLs. Replace them with your own media before sharing a personal version.
