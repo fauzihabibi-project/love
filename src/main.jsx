@@ -17,14 +17,8 @@ const youtubeId = 'lY5V4hSLWY8';
 function App() {
   const [page, setPage] = useState('intro');
   const [lightbox, setLightbox] = useState(null);
-  const [opening, setOpening] = useState(false);
 
   const go = (next) => { setPage(next); window.scrollTo({ top: 0, behavior: 'smooth' }); };
-  const openEnvelope = () => {
-    if (opening) return;
-    setOpening(true);
-    window.setTimeout(() => go('home'), 900);
-  };
   const surprise = (kind) => {
     if (kind === 'letter') go('envelope');
     else go(kind);
@@ -39,14 +33,13 @@ function App() {
       {page === 'intro' && <motion.section className="scene intro-scene" key="intro" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, scale: 1.06, filter: 'blur(10px)' }} transition={{ duration: .85 }}>
         <motion.div className="intro-heading" initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, ease: [.2, .8, .2, 1] }}><span className="scene-kicker">A LITTLE SURPRISE, MADE FOR YOU</span><h1>Press the <em>Envelope</em></h1><span className="intro-ornament">✦　────────　❦　────────　✦</span></motion.div>
         <motion.div className="intro-orbit orbit-one" animate={{ rotate: 360 }} transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}><i>✦</i></motion.div><motion.div className="intro-orbit orbit-two" animate={{ rotate: -360 }} transition={{ duration: 36, repeat: Infinity, ease: 'linear' }}><i>♡</i></motion.div>
-        <motion.button className={`intro-envelope${opening ? ' opening' : ''}`} onClick={openEnvelope} aria-label="Buka amplop anniversary" initial={{ opacity: 0, y: 35, scale: .92 }} animate={{ opacity: 1, y: [0, -9, 0], scale: 1 }} transition={{ opacity: { delay: .35, duration: .8 }, scale: { delay: .35, duration: .8 }, y: { delay: .9, duration: 4, repeat: Infinity, ease: 'easeInOut' } }} whileHover={{ scale: 1.045, rotate: -1 }} whileTap={{ scale: .96 }}>
-          <motion.span className="intro-letter-paper" animate={opening ? { y: -95, scale: 1.06 } : { y: [23, -5, 23] }} transition={opening ? { duration: .8, ease: [.2, .8, .2, 1] } : { delay: .8, duration: 4, repeat: Infinity, ease: 'easeInOut' }}><span>FOR YOU</span><Heart size={18} /></motion.span>
+        <motion.div className="intro-envelope" aria-hidden="true" initial={{ opacity: 0, y: 35, scale: .92 }} animate={{ opacity: 1, y: [0, -9, 0], scale: 1 }} transition={{ opacity: { delay: .35, duration: .8 }, scale: { delay: .35, duration: .8 }, y: { delay: .9, duration: 4, repeat: Infinity, ease: 'easeInOut' } }}>
           <motion.span className="intro-envelope-body" />
-          <motion.span className="intro-envelope-flap" whileHover={{ rotateX: 180 }} transition={{ duration: .7, ease: [.2, .8, .2, 1] }} />
+          <motion.span className="intro-envelope-flap" />
           <motion.span className="intro-wax-seal" animate={{ scale: [1, 1.09, 1], boxShadow: ['0 0 0 0 #df5d5744', '0 0 0 16px #df5d5700', '0 0 0 0 #df5d5744'] }} transition={{ duration: 2.2, repeat: Infinity, ease: 'easeOut' }}><Heart size={27} /></motion.span>
           <span className="envelope-glint" />
-        </motion.button>
-        <motion.button className="intro-continue" onClick={openEnvelope} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 1 }}><span>tap to continue</span><ArrowRight size={15} /></motion.button>
+        </motion.div>
+        <motion.button className="intro-continue" onClick={() => go('home')} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 1 }}><span>tap to continue</span><ArrowRight size={15} /></motion.button>
         <div className="intro-hearts" aria-hidden="true">{Array.from({ length: 18 }, (_, i) => <span key={i} style={{ '--x': `${(i * 67 + 9) % 100}%`, '--delay': `${(i % 6) * -1.8}s`, '--duration': `${12 + (i % 5) * 2}s` }}>{i % 3 === 0 ? '♡' : '✦'}</span>)}</div>
       </motion.section>}
 
